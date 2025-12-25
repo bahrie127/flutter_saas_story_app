@@ -1,56 +1,77 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter_story_app/core/constants/variables.dart';
-import 'package:flutter_story_app/data/models/auth_response_model.dart';
-import 'package:http/http.dart' as http;
+import '../../core/constants/variables.dart';
+import '../../core/utils/api_handler.dart';
+import '../models/auth_response_model.dart';
+import '../models/user_model.dart';
 
 class AuthRemoteDatasource {
-  Future<Either<String, AuthResponseModel>> login(
-    String username,
-    String password,
-  ) async {
-    final data = await http.post(
-      Uri.parse('${Variables.baseUrl}auth/login'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+  Future<Either<String, AuthResponseModel>> register({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    final result = await ApiHandler.post(
+      Variables.register,
+      body: {
+        'name': name,
+        'email': email,
+        'password': password,
       },
-      body: jsonEncode({'username': username, 'password': password}),
     );
-    // Handle response and return Either<String, AuthResponseModel>
-    if (data.statusCode == 200) {
-      final authResponse = AuthResponseModel.fromJson(data.body);
-      return Right(authResponse);
-    } else {
-      return Left('Login failed with status code: ${data.statusCode}');
-    }
+
+    return result.fold(
+      (error) => Left(error),
+      (data) {
+        final authResponse = AuthResponseModel.fromJson(data);
+        ApiHandler.saveToken(authResponse.token);
+        return Right(authResponse);
+      },
+    );
   }
 
-  //register
-  Future<Either<String, AuthResponseModel>> register(
-    String username,
-    String password,
-    String email,
-  ) async {
-    final data = await http.post(
-      Uri.parse('${Variables.baseUrl}register'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: jsonEncode({
-        'name': username,
-        'password': password,
+  Future<Either<String, AuthResponseModel>> login({
+    required String email,
+    required String password,
+  }) async {
+    final result = await ApiHandler.post(
+      Variables.login,
+      body: {
         'email': email,
-      }),
+        'password': password,
+      },
     );
-    // Handle response and return Either<String, AuthResponseModel>
-    if (data.statusCode == 201) {
-      final authResponse = AuthResponseModel.fromJson(data.body);
-      return Right(authResponse);
-    } else {
-      return Left('Registration failed with status code: ${data.statusCode}');
-    }
+
+    return result.fold(
+      (error) => Left(error),
+      (data) {
+        final authResponse = AuthResponseModel.fromJson(data);
+        ApiHandler.saveToken(authResponse.token);
+        return Right(authResponse);
+      },
+    );
+  }
+
+  Future<Either<String, String>> logout() async {
+    final result = await ApiHandler.post(Variables.logout);
+
+    await ApiHandler.removeToken();
+
+    return result.fold(
+      (error) => const Right('Logout berhasil'),
+      (data) => Right(data['message'] ?? 'Logout berhasil'),
+    );
+  }
+
+  Future<Either<String, UserModel>> getProfile() async {
+    final result = await ApiHandler.get(Variables.profile);
+
+    return result.fold(
+      (error) => Left(error),
+      (data) => Right(UserModel.fromJson(data)),
+    );
+  }
+
+  Future<bool> isLoggedIn() async {
+    return ApiHandler.isLoggedIn();
   }
 }

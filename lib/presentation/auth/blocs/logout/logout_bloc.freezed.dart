@@ -55,11 +55,11 @@ extension LogoutEventPatterns on LogoutEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Logout value)?  logout,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started(_that);case _:
+case _Logout() when logout != null:
+return logout(_that);case _:
   return orElse();
 
 }
@@ -77,14 +77,11 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Logout value)  logout,}){
 final _that = this;
 switch (_that) {
-case _Started():
-return started(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+case _Logout():
+return logout(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -98,11 +95,11 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Logout value)?  logout,}){
 final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started(_that);case _:
+case _Logout() when logout != null:
+return logout(_that);case _:
   return null;
 
 }
@@ -119,10 +116,10 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  logout,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started();case _:
+case _Logout() when logout != null:
+return logout();case _:
   return orElse();
 
 }
@@ -140,13 +137,10 @@ return started();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  logout,}) {final _that = this;
 switch (_that) {
-case _Started():
-return started();case _:
-  throw StateError('Unexpected subclass');
-
-}
+case _Logout():
+return logout();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -160,10 +154,10 @@ return started();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  logout,}) {final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started();case _:
+case _Logout() when logout != null:
+return logout();case _:
   return null;
 
 }
@@ -174,8 +168,8 @@ return started();case _:
 /// @nodoc
 
 
-class _Started implements LogoutEvent {
-  const _Started();
+class _Logout implements LogoutEvent {
+  const _Logout();
   
 
 
@@ -185,7 +179,7 @@ class _Started implements LogoutEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Started);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Logout);
 }
 
 
@@ -194,7 +188,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'LogoutEvent.started()';
+  return 'LogoutEvent.logout()';
 }
 
 
@@ -247,11 +241,14 @@ extension LogoutStatePatterns on LogoutState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Success() when success != null:
+return success(_that);case _Error() when error != null:
+return error(_that);case _:
   return orElse();
 
 }
@@ -269,14 +266,14 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return initial(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+return initial(_that);case _Loading():
+return loading(_that);case _Success():
+return success(_that);case _Error():
+return error(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -290,11 +287,14 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Success() when success != null:
+return success(_that);case _Error() when error != null:
+return error(_that);case _:
   return null;
 
 }
@@ -311,10 +311,13 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( String message)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _:
+return initial();case _Loading() when loading != null:
+return loading();case _Success() when success != null:
+return success(_that.message);case _Error() when error != null:
+return error(_that.message);case _:
   return orElse();
 
 }
@@ -332,13 +335,13 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( String message)  success,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return initial();case _:
-  throw StateError('Unexpected subclass');
-
-}
+return initial();case _Loading():
+return loading();case _Success():
+return success(_that.message);case _Error():
+return error(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -352,10 +355,13 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( String message)?  success,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _:
+return initial();case _Loading() when loading != null:
+return loading();case _Success() when success != null:
+return success(_that.message);case _Error() when error != null:
+return error(_that.message);case _:
   return null;
 
 }
@@ -394,5 +400,169 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _Loading implements LogoutState {
+  const _Loading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LogoutState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Success implements LogoutState {
+  const _Success(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of LogoutState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SuccessCopyWith<_Success> get copyWith => __$SuccessCopyWithImpl<_Success>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'LogoutState.success(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SuccessCopyWith<$Res> implements $LogoutStateCopyWith<$Res> {
+  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$SuccessCopyWithImpl<$Res>
+    implements _$SuccessCopyWith<$Res> {
+  __$SuccessCopyWithImpl(this._self, this._then);
+
+  final _Success _self;
+  final $Res Function(_Success) _then;
+
+/// Create a copy of LogoutState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_Success(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Error implements LogoutState {
+  const _Error(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of LogoutState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'LogoutState.error(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ErrorCopyWith<$Res> implements $LogoutStateCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(this._self, this._then);
+
+  final _Error _self;
+  final $Res Function(_Error) _then;
+
+/// Create a copy of LogoutState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_Error(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 // dart format on
