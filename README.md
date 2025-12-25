@@ -1,16 +1,85 @@
-# flutter_story_app
+# Flutter Story App
 
-A new Flutter project.
+Aplikasi Flutter untuk berbagi cerita dengan fitur autentikasi, upload gambar, dan lokasi menggunakan Clean Architecture + BLoC Pattern.
+
+## Features
+
+- **Authentication**: Login, Register, Logout
+- **Story Management**: Create, Read, Update, Delete stories
+- **Image Upload**: Ambil foto dari kamera atau galeri
+- **Location**: Integrasi Google Maps untuk menampilkan lokasi story
+- **Profile**: Halaman profil pengguna
+
+## Tech Stack
+
+- **Flutter** - UI Framework
+- **BLoC** - State Management
+- **Freezed** - Code Generation untuk immutable classes
+- **Dio** - HTTP Client
+- **Shared Preferences** - Local Storage
+- **Google Maps Flutter** - Maps Integration
+- **Image Picker** - Camera & Gallery Access
+- **Cached Network Image** - Image Caching
+
+## Project Structure
+
+```
+lib/
+├── core/
+│   ├── components/          # Reusable UI components
+│   ├── constants/           # App colors, sizes, variables
+│   ├── extensions/          # BuildContext extensions
+│   └── utils/               # Helper utilities
+├── data/
+│   ├── datasources/         # Remote & Local datasources
+│   └── models/              # Data models
+├── presentation/
+│   ├── auth/                # Login, Register pages & blocs
+│   ├── profile/             # Profile page & bloc
+│   ├── splash/              # Splash screen
+│   └── story/               # Story pages & blocs
+└── main.dart
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter SDK >= 3.0.0
+- Dart SDK >= 3.0.0
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone repository
+```bash
+git clone https://github.com/bahrie127/flutter_saas_story_app.git
+cd flutter_saas_story_app
+```
+
+2. Install dependencies
+```bash
+flutter pub get
+```
+
+3. Generate freezed files
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+4. Run app
+```bash
+flutter run
+```
+
+## API
+
+Aplikasi ini menggunakan Story API dari:
+- Base URL: `https://story-api.dicoding.dev/v1`
+
+## Screenshots
+
+Coming soon...
+
+## License
+
+MIT License
